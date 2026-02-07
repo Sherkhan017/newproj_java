@@ -4,9 +4,12 @@ import com.example.social.domain.Account;
 import com.example.social.domain.Profile;
 import com.example.social.dto.ProfileRequest;
 import com.example.social.service.ProfileService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/profiles")
@@ -18,7 +21,8 @@ public class ProfileController {
     }
 
     @PostMapping
-    public Profile create(@RequestBody ProfileRequest request) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Profile create(@Valid @RequestBody ProfileRequest request) {
         Profile profile = new Profile.Builder()
                 .username(request.username())
                 .bio(request.bio())
@@ -47,8 +51,13 @@ public class ProfileController {
         return profileService.sortedAccountsByUsername();
     }
 
+    @GetMapping("/{id}/metadata")
+    public Map<String, Object> metadata(@PathVariable Long id) {
+        return profileService.profileMetadata(id);
+    }
+
     @PutMapping("/{id}")
-    public Profile update(@PathVariable Long id, @RequestBody ProfileRequest request) {
+    public Profile update(@PathVariable Long id, @Valid @RequestBody ProfileRequest request) {
         Profile profile = new Profile.Builder()
                 .username(request.username())
                 .bio(request.bio())

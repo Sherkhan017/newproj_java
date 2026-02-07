@@ -9,7 +9,10 @@ import com.example.social.util.InMemoryDataPool;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import com.example.social.util.ReflectionInspector;
+
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -70,6 +73,17 @@ public class ProfileServiceImpl implements ProfileService {
                 .stream()
                 .map(p -> (Account) p)
                 .toList();
+    }
+
+
+    @Override
+    public Map<String, Object> profileMetadata(Long id) {
+        Profile profile = getById(id);
+        return Map.of(
+                "id", profile.getId(),
+                "type", profile.getClass().getSimpleName(),
+                "fields", ReflectionInspector.fieldNames(profile.getClass()),
+                "role", profile.role());
     }
 
     private void validateProfile(Profile profile) {

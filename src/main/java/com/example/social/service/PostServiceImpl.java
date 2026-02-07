@@ -8,6 +8,7 @@ import com.example.social.repository.PostRepository;
 import com.example.social.util.InMemoryDataPool;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -27,7 +28,9 @@ public class PostServiceImpl implements PostService {
         validatePost(post);
         profileService.getById(post.getProfileId());
         PostFactory factory = new PostFactory(post.getProfileId(), post.getContent());
-        Post saved = postRepository.save(factory.createAndValidate(this::validatePost));
+        Post generated = factory.createAndValidate(this::validatePost);
+        generated.setCreatedAt(LocalDateTime.now());
+        Post saved = postRepository.save(generated);
         refreshPool();
         return saved;
     }
@@ -47,7 +50,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post update(Long id, Post post) {
         validatePost(post);
-        getById(id);
+        Post existing = getById(id);
+        if (!existing.getProfileId().equals(post.getProfileId())) {
+            throw new InvalidInputException("Post owner cannot be changed");
+        }
+        post.setCreatedAt(existing.getCreatedAt());
         Post updated = postRepository.update(id, post);
         refreshPool();
         return updated;

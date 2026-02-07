@@ -56,9 +56,20 @@ curl -X POST http://localhost:8080/api/profiles \
 
 curl http://localhost:8080/api/profiles/search?username=ali
 
+curl http://localhost:8080/api/profiles/1/metadata
+
 curl -X POST http://localhost:8080/api/posts \
   -H "Content-Type: application/json" \
   -d '{"profileId":1,"content":"My first post"}'
 
 curl http://localhost:8080/api/posts/sorted/newest
 ```
+
+
+## Frontend
+A simple web UI is available at `http://localhost:8080/` after running the app.
+It supports:
+- Creating profiles
+- Creating posts
+- Listing profiles and newest posts
+- Searching profiles by username

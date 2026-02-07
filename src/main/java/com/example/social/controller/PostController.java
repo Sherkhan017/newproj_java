@@ -3,9 +3,10 @@ package com.example.social.controller;
 import com.example.social.domain.Post;
 import com.example.social.dto.PostRequest;
 import com.example.social.service.PostService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -18,8 +19,9 @@ public class PostController {
     }
 
     @PostMapping
-    public Post create(@RequestBody PostRequest request) {
-        return postService.create(new Post(null, request.profileId(), request.content(), LocalDateTime.now()));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Post create(@Valid @RequestBody PostRequest request) {
+        return postService.create(new Post(null, request.profileId(), request.content(), null));
     }
 
     @GetMapping
@@ -43,8 +45,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public Post update(@PathVariable Long id, @RequestBody PostRequest request) {
-        return postService.update(id, new Post(id, request.profileId(), request.content(), LocalDateTime.now()));
+    public Post update(@PathVariable Long id, @Valid @RequestBody PostRequest request) {
+        return postService.update(id, new Post(id, request.profileId(), request.content(), null));
     }
 
     @DeleteMapping("/{id}")

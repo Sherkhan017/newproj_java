@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Network Frontend</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Social Media Networking Platform</h1>
+        <p>Simple frontend for Profiles and Posts API</p>
+    </header>
+
+    <section class="card">
+        <h2>Create Profile</h2>
+        <form id="profileForm" class="grid">
+            <input id="username" placeholder="username" required maxlength="100" />
+            <input id="bio" placeholder="bio" maxlength="500" />
+            <input id="interests" placeholder="interests" maxlength="500" />
+            <button type="submit">Create Profile</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Create Post</h2>
+        <form id="postForm" class="grid">
+            <input id="profileId" type="number" min="1" placeholder="profile id" required />
+            <textarea id="content" placeholder="post content" required maxlength="1000"></textarea>
+            <button type="submit">Create Post</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <div class="row">
+            <h2>Profiles</h2>
+            <button id="reloadProfiles" type="button">Reload</button>
+        </div>
+        <div id="profiles" class="list"></div>
+    </section>
+
+    <section class="card">
+        <div class="row">
+            <h2>Posts (Newest first)</h2>
+            <button id="reloadPosts" type="button">Reload</button>
+        </div>
+        <div id="posts" class="list"></div>
+    </section>
+
+    <section class="card">
+        <h2>Search Profile by Username</h2>
+        <form id="searchForm" class="row">
+            <input id="searchUsername" placeholder="type part of username" />
+            <button type="submit">Search</button>
+        </form>
+        <div id="searchResults" class="list"></div>
+    </section>
+
+    <div id="status" class="status"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

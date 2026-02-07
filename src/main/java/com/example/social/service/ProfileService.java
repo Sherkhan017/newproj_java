@@ -4,6 +4,7 @@ import com.example.social.domain.Account;
 import com.example.social.domain.Profile;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProfileService {
     Profile create(Profile profile);
@@ -13,4 +14,5 @@ public interface ProfileService {
     void delete(Long id);
     List<Profile> searchByUsername(String part);
     List<Account> sortedAccountsByUsername();
+    Map<String, Object> profileMetadata(Long id);
 }
