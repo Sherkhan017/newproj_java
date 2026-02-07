@@ -35,7 +35,6 @@ This project implements a **SocialNetwork** with key entities:
    - Generics: `InMemoryDataPool<T>`, `EntityFactory<T>`, `Validator<T>`.
    - Lambda expressions: filtering and sorting in service/data pool.
    - Default + static interface methods: `EntityFactory#createAndValidate` and `EntityFactory#normalize`.
-   - Reflection: `ReflectionInspector` + `/api/profiles/{id}/metadata` endpoint.
 9. **Design Patterns**:
    - Builder: `Profile.Builder`.
    - Factory: `PostFactory`.
@@ -44,16 +43,7 @@ This project implements a **SocialNetwork** with key entities:
 1. Create PostgreSQL DB `social_network`.
 2. Run schema in `src/main/resources/schema.sql`.
 3. Configure credentials in `application.properties`.
-4. Start app (recommended with Maven Wrapper, no global Maven install needed):
-   ```bash
-   # Linux / macOS
-   ./mvnw spring-boot:run
-
-   # Windows PowerShell
-   .\mvnw.cmd spring-boot:run
-   ```
-
-   Alternative (if Maven is installed globally):
+4. Start app:
    ```bash
    mvn spring-boot:run
    ```
