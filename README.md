@@ -44,7 +44,16 @@ This project implements a **SocialNetwork** with key entities:
 1. Create PostgreSQL DB `social_network`.
 2. Run schema in `src/main/resources/schema.sql`.
 3. Configure credentials in `application.properties`.
-4. Start app:
+4. Start app (recommended with Maven Wrapper, no global Maven install needed):
+   ```bash
+   # Linux / macOS
+   ./mvnw spring-boot:run
+
+   # Windows PowerShell
+   .\mvnw.cmd spring-boot:run
+   ```
+
+   Alternative (if Maven is installed globally):
    ```bash
    mvn spring-boot:run
    ```
